@@ -1,0 +1,45 @@
+runOnInit: true
+cronEnabled: false
+traceable:
+  endpoint: "<enter_your_traceable_endpoint_url>"
+  token: "<enter_your_token>"
+  defaultTimeRange: "now-1d"
+  httpClientSpec: "readTimeout=30s,connectTimeout=2s,callTimeout=32s"
+  environments:
+    #includes: ["dkp-dev-stl-general"]
+    #includes: ["dkp-dev-stl-general","dkp-dev-stl-external","mpapsds1-aks","mpdevcus-aks-gen-app-cluster-02","mpecids1-aks-ext-client","mpexvds1-aks-ext-gw-01","mpkmsds1-gen-app-cluster-01","mpdevcus-aks-gen-app-cluster-02"]
+    includes: [".*(ps|pn|prod).*"]
+    excludes: [ ]
+    limit: 1000
+    includeInactive: true
+  services:
+    includes: [ ".*" ]
+    excludes: [ ]
+    limit: 50000
+    includeInactive: true
+  apis:
+    includes: [ ".*" ]
+    excludes: [ ]
+    limit: 100000
+    includeInactive: true
+    inclLearning: true
+
+
+mule:
+  httpClientSpec: "readTimeout=30s,connectTimeout=2s,callTimeout=32s"
+  clientId: "<enter_client_id>"
+  clientSecret: "<enter_client_secret>"
+  apiGroupId: "ai.traceable.mule"
+  # New Properties >>
+  forcePublish: true
+  lifeCycleState: development
+  tags: [ "Traceable"]
+  orgId: "0672bf70-041f-41d5-8acd-68b5bfcec5e0"
+  orgGroupId: "0672bf70-041f-41d5-8acd-68b5bfcec5e0"
+  apiVersion: "1.0.1"
+  serviceTags:
+    enabled: true
+    detectContactName: true
+    detectContactEmail: true
+ #  This is to filter the contact name. Exclude all the other labels
+    nonContactTags: ["test"]
